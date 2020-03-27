@@ -68,7 +68,7 @@ var TaskRouterBaseUrl = "https://taskrouter.twilio.com"
 const TaskRouterVersion = "v1"
 
 // Studio service
-var StudioBaseUrl = "https://studio.twilio.com"
+const StudioBaseUrl = "https://studio.twilio.com"
 const StudioVersion = "v2"
 
 type Client struct {
@@ -82,7 +82,7 @@ type Client struct {
 	Verify     *Client
 	Video      *Client
 	TaskRouter *Client
-  Studio *Client
+	Studio     *Client
 
 	// FullPath takes a path part (e.g. "Messages") and
 	// returns the full API path, including the version (e.g.
@@ -140,8 +140,8 @@ type Client struct {
 	// NewTaskRouterClient initializes these services
 	Workspace func(sid string) *WorkspaceService
 
-  // NewStudioClient initializes these services
-  Flows *FlowService
+	// NewStudioClient initializes these services
+	Flows *FlowService
 }
 
 const defaultTimeout = 30*time.Second + 500*time.Millisecond
@@ -326,10 +326,16 @@ func NewVideoClient(accountSid string, authToken string, httpClient *http.Client
 	return c
 }
 
+// NewStudioClient returns a Client for use with the Studio API
 func NewStudioClient(accountSid string, authToken string, httpClient *http.Client) *Client {
-	c := newNewClient(accountSid, authToken, PricingBaseURL, httpClient)
+	if httpClient == nil {
+		httpClient = &http.Client{Timeout: defaultTimeout}
+	}
+
+	c := newNewClient(accountSid, authToken, StudioBaseUrl, httpClient)
 	c.APIVersion = StudioVersion
-  c.Flows = &FlowService{client: c}
+	c.Flows = &FlowService{client: c}
+
 	return c
 }
 
@@ -360,7 +366,7 @@ func NewClient(accountSid string, authToken string, httpClient *http.Client) *Cl
 	c.Verify = NewVerifyClient(accountSid, authToken, httpClient)
 	c.Video = NewVideoClient(accountSid, authToken, httpClient)
 	c.TaskRouter = NewTaskRouterClient(accountSid, authToken, httpClient)
-  c.Studio = NewStudioClient(accountSid, authToken, httpClient)
+	c.Studio = NewStudioClient(accountSid, authToken, httpClient)
 
 	c.Accounts = &AccountService{client: c}
 	c.Applications = &ApplicationService{client: c}
