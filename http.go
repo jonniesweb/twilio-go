@@ -326,7 +326,7 @@ func NewVideoClient(accountSid string, authToken string, httpClient *http.Client
 	return c
 }
 
-func NewStudioClient(accountSid string, authToken string, httpClient *httpClient.Client) *Client {
+func NewStudioClient(accountSid string, authToken string, httpClient *http.Client) *Client {
 	c := newNewClient(accountSid, authToken, PricingBaseURL, httpClient)
 	c.APIVersion = StudioVersion
   c.Flows = &FlowService{client: c}
