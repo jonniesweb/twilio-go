@@ -20,16 +20,16 @@ type FlowService struct {
 }
 
 type Flow struct {
-	Sid          string     `json:"sid"`
-	FriendlyName string     `json:"friendly_name"`
-	Status       string     `json:status""`
-	Valid        string     `json:"valid"`
-	Errors       string     `json:"errors"`
-	WebhookUrl   string     `json:"webhook_url"`
-	DateCreated  TwilioTime `json:"date_created"`
-	DateUpdated  TwilioTime `json:"date_updated"`
-	Url          string     `json:"url"`
-	Definition   string     `json:"definition"`
+	Sid          string            `json:"sid"`
+	FriendlyName string            `json:"friendly_name"`
+	Status       string            `json:status""`
+	Valid        string            `json:"valid"`
+	Errors       string            `json:"errors"`
+	WebhookUrl   string            `json:"webhook_url"`
+	DateCreated  TwilioTime        `json:"date_created"`
+	DateUpdated  TwilioTime        `json:"date_updated"`
+	Url          string            `json:"url"`
+	Definition   map[string]string `json:"definition"`
 }
 
 func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error) {
