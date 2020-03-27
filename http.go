@@ -187,7 +187,7 @@ func parseTwilioError(resp *http.Response) error {
 		Type:   rerr.MoreInfo,
 		ID:     strconv.Itoa(rerr.Code),
 		Status: resp.StatusCode,
-    Errors: rerr.Errors
+    Errors: rerr.Errors,
 	}
 }
 
