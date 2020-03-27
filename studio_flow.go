@@ -12,8 +12,8 @@ type FlowService struct {
 }
 
 type FlowError struct {
-  Message string
-  PropertyPath string
+	Message      string `json:"message"`
+	PropertyPath string `json:"property_path"`
 }
 
 type Flow struct {
