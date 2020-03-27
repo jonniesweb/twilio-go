@@ -50,10 +50,11 @@ func (f *FlowService) Get(ctx context.Context, sid string) (map[string]interface
 	return flow, err
 }
 
-func (f *FlowService) Update(ctx context.Context, sid string, data url.Values) (*Flow, error) {
-	flow := new(Flow)
+func (f *FlowService) Update(ctx context.Context, sid string, data url.Values) (map[string]interface{}, error) {
+	// flow := new(Flow)
+	var flow map[string]interface{}
 
-	err := f.client.UpdateResource(ctx, FlowPathPart, sid, data, flow)
+	err := f.client.UpdateResource(ctx, FlowPathPart, sid, data, &flow)
 
 	return flow, err
 }
