@@ -163,6 +163,7 @@ type twilioError struct {
 	MoreInfo string `json:"more_info"`
 	// This will be ignored in favor of the actual HTTP status code
 	Status int `json:"status"`
+  Errors  map[string]interface{} `json:"errors"`
 }
 
 func parseTwilioError(resp *http.Response) error {
@@ -186,6 +187,7 @@ func parseTwilioError(resp *http.Response) error {
 		Type:   rerr.MoreInfo,
 		ID:     strconv.Itoa(rerr.Code),
 		Status: resp.StatusCode,
+    Errors: rerr.Errors
 	}
 }
 
