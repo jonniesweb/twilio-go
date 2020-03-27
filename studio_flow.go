@@ -22,7 +22,8 @@ type Flow struct {
 	DateCreated  TwilioTime `json:"date_created"`
 	DateUpdated  TwilioTime `json:"date_updated"`
 	Url          string     `json:"url"`
-	Definition   string     `json:"definition"`
+	RawDefinition   interface{} `json:"definition"`
+	Definition   string
 }
 
 func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error) {
