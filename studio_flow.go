@@ -11,13 +11,18 @@ type FlowService struct {
 	client *Client
 }
 
+type FlowError struct {
+  Message string
+  PropertyPath string
+}
+
 type Flow struct {
 	Sid           string      `json:"sid"`
 	AccountSid    string      `json:"account_sid"`
 	FriendlyName  string      `json:"friendly_name"`
 	Status        string      `json:"status"`
 	Valid         bool        `json:"valid"`
-	RawErrors     []string    `json:"errors"`
+	RawErrors     []FlowError `json:"errors"`
 	Errors        string
 	WebhookUrl    string      `json:"webhook_url"`
 	DateCreated   TwilioTime  `json:"date_created"`
