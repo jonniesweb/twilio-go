@@ -51,6 +51,11 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
   }
 
   json, err := json.Marshal(flow.rawDefinition)
+  if err != nil {
+    panic(err)
+    return flow, err
+  }
+
   flow.Definition = string(json)
 
 	return flow, err
