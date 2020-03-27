@@ -2,8 +2,8 @@ package twilio
 
 import (
 	"context"
+	"encoding/json"
 	"net/url"
-  "encoding/json"
 )
 
 const FlowPathPart = "Flows"
@@ -30,7 +30,7 @@ type Flow struct {
 	DateUpdated   TwilioTime  `json:"date_updated"`
 	Url           string      `json:"url"`
 	rawDefinition interface{} `json:"definition"`
-  Definition    string      `json:"-"`
+	Definition    string      `json:"-"`
 }
 
 func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error) {
@@ -46,17 +46,17 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
 
 	err := f.client.GetResource(ctx, FlowPathPart, sid, flow)
 
-  if err != nil {
-    return flow, err
-  }
+	if err != nil {
+		return flow, err
+	}
 
-  json, err := json.Marshal(flow.rawDefinition)
-  if err != nil {
-    panic(err)
-    return flow, err
-  }
+	json, err := json.Marshal(flow.rawDefinition)
+	if err != nil {
+		panic(err)
+		return flow, err
+	}
 
-  flow.Definition = string(json)
+	flow.Definition = string(json)
 
 	return flow, err
 }
