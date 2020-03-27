@@ -30,7 +30,7 @@ type Flow struct {
 	DateUpdated   TwilioTime  `json:"date_updated"`
 	Url           string      `json:"url"`
 	rawDefinition interface{} `json:"definition"`
-	Definition    string
+	ADefinition    string
 }
 
 func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error) {
@@ -47,7 +47,6 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
 	err := f.client.GetResource(ctx, FlowPathPart, sid, flow)
 
   if err != nil {
-    panic(err)
     return flow, err
   }
 
@@ -57,7 +56,7 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
     return flow, err
   }
 
-  flow.Definition = string(json)
+  flow.ADefinition = string(json)
 
 	return flow, err
 }
