@@ -47,6 +47,7 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
 	err := f.client.GetResource(ctx, FlowPathPart, sid, flow)
 
   if err != nil {
+    panic(err)
     return flow, err
   }
 
