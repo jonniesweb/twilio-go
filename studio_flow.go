@@ -12,23 +12,23 @@ type FlowService struct {
 }
 
 type Flow struct {
-	Sid          string     `json:"sid"`
-	AccountSid   string     `json:"account_sid"`
-	FriendlyName string     `json:"friendly_name"`
-	Status       string     `json:"status"`
-	Valid        bool `json:"valid"`
-	RawErrors       interface{} `json:"errors"`
-  Errors string
-	WebhookUrl   string     `json:"webhook_url"`
-	DateCreated  TwilioTime `json:"date_created"`
-	DateUpdated  TwilioTime `json:"date_updated"`
-	Url          string     `json:"url"`
-	RawDefinition   interface{} `json:"definition"`
-	Definition   string
+	Sid           string      `json:"sid"`
+	AccountSid    string      `json:"account_sid"`
+	FriendlyName  string      `json:"friendly_name"`
+	Status        string      `json:"status"`
+	Valid         bool        `json:"valid"`
+	RawErrors     []string    `json:"errors"`
+	Errors        string
+	WebhookUrl    string      `json:"webhook_url"`
+	DateCreated   TwilioTime  `json:"date_created"`
+	DateUpdated   TwilioTime  `json:"date_updated"`
+	Url           string      `json:"url"`
+	rawDefinition interface{} `json:"definition"`
+	Definition    string
 }
 
 func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error) {
-  flow := new(Flow)
+	flow := new(Flow)
 
 	err := f.client.CreateResource(ctx, FlowPathPart, data, flow)
 
@@ -36,7 +36,7 @@ func (f *FlowService) Create(ctx context.Context, data url.Values) (*Flow, error
 }
 
 func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
-  flow := new(Flow)
+	flow := new(Flow)
 
 	err := f.client.GetResource(ctx, FlowPathPart, sid, flow)
 
@@ -44,7 +44,7 @@ func (f *FlowService) Get(ctx context.Context, sid string) (*Flow, error) {
 }
 
 func (f *FlowService) Update(ctx context.Context, sid string, data url.Values) (*Flow, error) {
-  flow := new(Flow)
+	flow := new(Flow)
 
 	err := f.client.UpdateResource(ctx, FlowPathPart, sid, data, flow)
 
