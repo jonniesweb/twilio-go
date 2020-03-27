@@ -16,7 +16,7 @@ type Flow struct {
 	AccountSid   string     `json:"account_sid"`
 	FriendlyName string     `json:"friendly_name"`
 	Status       string     `json:"status"`
-	Valid        string     `json:"valid"`
+	Valid        bool `json:"valid"`
 	RawErrors       interface{} `json:"errors"`
   Errors string
 	WebhookUrl   string     `json:"webhook_url"`
