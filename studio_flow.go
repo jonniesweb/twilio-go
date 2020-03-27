@@ -17,7 +17,8 @@ type Flow struct {
 	FriendlyName string     `json:"friendly_name"`
 	Status       string     `json:"status"`
 	Valid        string     `json:"valid"`
-	Errors       string     `json:"errors"`
+	RawErrors       interface{} `json:"errors"`
+  Errors string
 	WebhookUrl   string     `json:"webhook_url"`
 	DateCreated  TwilioTime `json:"date_created"`
 	DateUpdated  TwilioTime `json:"date_updated"`
